@@ -17,7 +17,11 @@ console.log('JWT_SECRET:', process.env.JWT_SECRET ? '✅ Set' : '❌ Not set');
 // Middleware
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://myfood-app.vercel.app', 'https://your-actual-vercel-domain.vercel.app']
+    ? [
+        'https://myfood-app.vercel.app', 
+        'https://your-actual-vercel-domain.vercel.app',
+        'https://myfood-frontend.onrender.com'
+      ]
     : ['http://localhost:5173'],
   credentials: true
 }));

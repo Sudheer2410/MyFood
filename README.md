@@ -156,6 +156,10 @@ MyFood/
 
 ## 🚀 Deployment
 
+### Frontend (Render)
+- **Live Demo:** https://myfood-frontend.onrender.com
+- **Backend API:** https://your-backend-app-name.onrender.com
+
 ### Frontend (Netlify)
 
 ## 🆘 Support
