@@ -1,11 +1,11 @@
-# MyFood - Zomato-like Food Delivery App
+# MyFood - Food Delivery App
 
 A modern food delivery application built with React, Node.js, and MongoDB, featuring a beautiful Zomato-inspired UI.
 
 ## 🚀 Features
 
 ### Frontend (React + Vite)
-- **Modern UI**: Zomato-inspired design with Tailwind CSS
+- **
 - **Onboarding Flow**: Location selection and user registration for first-time users
 - **Menu Management**: Browse, search, and filter menu items
 - **Cart System**: Add/remove items with quantity controls
@@ -55,7 +55,7 @@ A modern food delivery application built with React, Node.js, and MongoDB, featu
    Create a `.env` file in the server directory:
    ```env
    PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/myfood
+   
    JWT_SECRET=your-super-secret-jwt-key
    CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
    CLOUDINARY_API_KEY=your-cloudinary-api-key
@@ -157,49 +157,6 @@ MyFood/
 ## 🚀 Deployment
 
 ### Frontend (Netlify)
-1. Build the project: `npm run build`
-2. Deploy to Netlify with the `dist` folder
-
-### Backend (Render/Railway)
-1. Set environment variables
-2. Deploy to Render or Railway
-3. Update frontend API base URL
-
-### Database (MongoDB Atlas)
-1. Create MongoDB Atlas cluster
-2. Update connection string in environment variables
-
-## 🔧 Development
-
-### Adding New Features
-1. Create new components in `client/src/components/`
-2. Add new pages in `client/src/pages/`
-3. Create API endpoints in `server/routes/`
-4. Add controllers in `server/controllers/`
-
-### Styling
-- Use Tailwind CSS classes
-- Follow the existing color scheme (red-500 primary)
-- Maintain responsive design
-
-## 📱 Mobile Responsiveness
-
-The app is fully responsive and optimized for:
-- Desktop (1024px+)
-- Tablet (768px - 1023px)
-- Mobile (320px - 767px)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License.
 
 ## 🆘 Support
 
