@@ -1,5 +1,5 @@
-// Backend API configuration
-const API_BASE_URL = 'http://localhost:5000/api/food';
+// Use environment variable for API base URL
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
 // Fallback data in case API is not available
 const fallbackMenuItems = [
@@ -112,7 +112,7 @@ export const foodApi = {
   // Get random recipes (menu items)
   async getRandomRecipes(limit = 20) {
     try {
-      const response = await fetch(`${API_BASE_URL}/random?limit=${limit}`);
+      const response = await fetch(`${API_BASE_URL}/api/food/random?limit=${limit}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch recipes');
@@ -129,7 +129,7 @@ export const foodApi = {
   // Search recipes by query
   async searchRecipes(query, limit = 20) {
     try {
-      const response = await fetch(`${API_BASE_URL}/search?query=${encodeURIComponent(query)}&limit=${limit}`);
+      const response = await fetch(`${API_BASE_URL}/api/food/search?query=${encodeURIComponent(query)}&limit=${limit}`);
       
       if (!response.ok) {
         throw new Error('Failed to search recipes');
@@ -149,7 +149,7 @@ export const foodApi = {
   // Get recipes by cuisine type
   async getRecipesByCuisine(cuisine, limit = 20) {
     try {
-      const response = await fetch(`${API_BASE_URL}/cuisine/${encodeURIComponent(cuisine)}?limit=${limit}`);
+      const response = await fetch(`${API_BASE_URL}/api/food/cuisine/${encodeURIComponent(cuisine)}?limit=${limit}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch cuisine recipes');
@@ -168,7 +168,7 @@ export const foodApi = {
   // Get recipe details by ID
   async getRecipeById(id) {
     try {
-      const response = await fetch(`${API_BASE_URL}/recipe/${id}`);
+      const response = await fetch(`${API_BASE_URL}/api/food/recipe/${id}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch recipe details');
