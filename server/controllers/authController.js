@@ -10,23 +10,45 @@ const generateToken = (userId) => {
 
 // Helper: send verification email
 const sendVerificationEmail = async (email, token) => {
-  // Configure your SMTP transport (use real credentials in production)
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    }
-  });
+  // Check if email credentials are configured
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.log('Email credentials not configured, skipping email verification');
+    return;
+  }
 
-  const verifyUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/verify?token=${token}`;
+  try {
+    // Configure your SMTP transport (use real credentials in production)
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
 
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: 'Verify your email address',
-    html: `<h2>Verify your email</h2><p>Click the link below to verify your email address:</p><a href="${verifyUrl}">${verifyUrl}</a>`
-  });
+    const verifyUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/verify?token=${token}`;
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'Verify your email address - MyFood',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #e53e3e;">Welcome to MyFood!</h2>
+          <p>Thank you for registering. Please click the button below to verify your email address:</p>
+          <a href="${verifyUrl}" style="display: inline-block; background-color: #e53e3e; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0;">
+            Verify Email Address
+          </a>
+          <p>Or copy and paste this link in your browser:</p>
+          <p style="word-break: break-all; color: #666;">${verifyUrl}</p>
+          <p>This link will expire in 24 hours.</p>
+        </div>
+      `
+    });
+  } catch (error) {
+    console.error('Email sending error:', error.message);
+    throw error;
+  }
 };
 
 // Register user
@@ -59,15 +81,17 @@ exports.register = async (req, res) => {
     console.log('User saved successfully:', user._id);
 
     // Send verification email
-    await sendVerificationEmail(email, verificationToken);
-
-    // Generate token (but only allow login after verification)
-    // const token = generateToken(user._id);
+    try {
+      await sendVerificationEmail(email, verificationToken);
+      console.log('Verification email sent successfully');
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError.message);
+      // Continue with registration even if email fails
+    }
 
     res.status(201).json({
       message: 'User registered successfully. Please check your email to verify your account.',
-      // token,
-      // user: { id: user._id, name: user.name, email: user.email, role: user.role }
+      userId: user._id
     });
   } catch (error) {
     res.status(400).json({ message: 'Error registering user', error: error.message });
@@ -170,5 +194,18 @@ exports.updateProfile = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ message: 'Error updating profile', error: error.message });
+  }
+};
+
+// Get all users (for testing - remove in production)
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({}).select('-password -verificationToken');
+    res.json({
+      count: users.length,
+      users: users
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching users', error: error.message });
   }
 }; 

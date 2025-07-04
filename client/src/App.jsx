@@ -17,6 +17,7 @@ import RegisterPage from './pages/RegisterPage';
 import AdminMenuPage from './pages/admin/AdminMenuPage';
 import OnboardingPage from './pages/OnboardingPage';
 import ProfilePage from './pages/ProfilePage';
+import VerifyEmailPage from './pages/VerifyEmailPage';
 
 function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -39,12 +40,13 @@ function App() {
   }
 
   // Render auth pages without header and main wrapper
-  if (isAuthPage) {
+  if (isAuthPage || location.pathname === '/verify') {
     return (
       <PayPalScriptProvider options={paypalConfig}>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/verify" element={<VerifyEmailPage />} />
         </Routes>
       </PayPalScriptProvider>
     );

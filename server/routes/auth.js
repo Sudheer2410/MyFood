@@ -7,6 +7,9 @@ const { auth } = require('../middleware/auth');
 router.post('/register', authController.register);
 router.post('/login', authController.login);
 
+// Testing route (remove in production)
+router.get('/users', authController.getAllUsers);
+
 // Protected routes
 router.get('/me', auth, authController.getCurrentUser);
 router.put('/profile', auth, authController.updateProfile);
