@@ -184,18 +184,18 @@ const ProfilePage = () => {
       </div>
 
       {/* Profile Content */}
-      <div className="pt-20 -mt-16 pb-8 px-4">
+      <div className="pt-20 -mt-16 pb-8 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto">
           {/* Profile Card */}
           <div className="bg-white rounded-3xl shadow-xl border border-orange-100 overflow-hidden">
             {/* Header */}
-            <div className="bg-gradient-to-r from-orange-500 to-red-500 p-6 text-white text-center">
+            <div className="bg-gradient-to-r from-orange-500 to-red-500 p-4 sm:p-6 text-white text-center">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white bg-opacity-20 backdrop-blur-sm rounded-full text-sm font-semibold mb-2">
                 <User className="w-4 h-4" />
                 {user.role ? user.role.replace('_', ' ').toUpperCase() : 'USER'}
               </div>
-              <h1 className="text-3xl font-bold mb-1">{user.name}</h1>
-              <p className="text-orange-100">{user.email}</p>
+              <h1 className="text-2xl sm:text-3xl font-bold mb-1">{user.name}</h1>
+              <p className="text-orange-100 text-sm sm:text-base">{user.email}</p>
             </div>
 
             {/* Profile Details */}

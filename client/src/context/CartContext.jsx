@@ -44,42 +44,57 @@ const cartReducer = (state, action) => {
         items: []
       };
 
+    case 'LOAD_CART':
+      return {
+        ...state,
+        items: action.payload
+      };
+
     default:
       return state;
   }
 };
 
 export const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, {
-    items: []
-  });
-
-  // Load cart from localStorage on mount
-  useEffect(() => {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      const parsedCart = JSON.parse(savedCart);
-      parsedCart.items.forEach(item => {
-        dispatch({ type: 'ADD_ITEM', payload: item });
-      });
+  // Initialize state with cart from localStorage
+  const getInitialState = () => {
+    try {
+      const savedCart = localStorage.getItem('cart');
+      if (savedCart) {
+        const parsedCart = JSON.parse(savedCart);
+        console.log('Loading cart from localStorage:', parsedCart);
+        return {
+          items: parsedCart.items || []
+        };
+      }
+    } catch (error) {
+      console.error('Error loading cart from localStorage:', error);
     }
-  }, []);
+    return { items: [] };
+  };
+
+  const [state, dispatch] = useReducer(cartReducer, getInitialState());
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(state));
+    console.log('Saving cart to localStorage:', state);
   }, [state]);
 
   const addToCart = (item) => {
+    console.log('Adding item to cart:', item);
     dispatch({ type: 'ADD_ITEM', payload: item });
   };
 
   const removeFromCart = (itemId) => {
+    console.log('Removing item from cart:', itemId);
     dispatch({ type: 'REMOVE_ITEM', payload: itemId });
   };
 
   const updateQuantity = (itemId, quantity) => {
+    console.log('Updating quantity for item:', itemId, 'to:', quantity);
     if (quantity <= 0) {
+      // Remove item if quantity is 0 or less
       removeFromCart(itemId);
     } else {
       dispatch({ type: 'UPDATE_QUANTITY', payload: { id: itemId, quantity } });
@@ -87,6 +102,8 @@ export const CartProvider = ({ children }) => {
   };
 
   const clearCart = () => {
+    console.log('Clearing cart');
+    localStorage.removeItem('cart'); // Also clear localStorage
     dispatch({ type: 'CLEAR_CART' });
   };
 

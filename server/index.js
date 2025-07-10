@@ -40,18 +40,38 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Database connection
+// Database connection with better error handling
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/myfood';
 console.log('🔗 Connecting to MongoDB...');
+console.log('📡 Using URI:', MONGODB_URI);
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 10000, // 10 seconds timeout
+  socketTimeoutMS: 45000,
+  family: 4, // Force IPv4
+  maxPoolSize: 10,
+  serverApi: {
+    version: '1',
+    strict: true,
+    deprecationErrors: true,
+  }
+})
 .then(() => {
   console.log('✅ Connected to MongoDB successfully!');
   console.log('📊 Database:', mongoose.connection.db.databaseName);
 })
 .catch(err => {
   console.error('❌ MongoDB connection error:', err);
-  process.exit(1);
+  console.log('💡 Troubleshooting tips:');
+  console.log('1. Check if your IP is whitelisted in MongoDB Atlas');
+  console.log('2. Verify your connection string in .env file');
+  console.log('3. Check your internet connection');
+  console.log('4. Try using a different DNS server');
+  
+  // Don't exit, let the app continue with mock data
+  console.log('🔄 Continuing without database connection...');
 });
 
 // Routes

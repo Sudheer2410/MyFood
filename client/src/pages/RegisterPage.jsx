@@ -65,7 +65,7 @@ function RegisterPage() {
       </div>
 
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4 w-full">
-        <div className="backdrop-blur-xl bg-white/20 rounded-2xl shadow-2xl max-w-sm w-full p-4 border border-white/30">
+        <div className="backdrop-blur-xl bg-white/20 rounded-2xl shadow-2xl max-w-sm w-full p-4 sm:p-6 border border-white/30">
           {/* Back Button */}
           <Link 
             to="/login" 
@@ -80,8 +80,8 @@ function RegisterPage() {
             <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg border border-white/30">
               <ChefHat className="text-white w-6 h-6" />
             </div>
-            <h1 className="text-xl font-bold text-white mb-1">Create Account</h1>
-            <p className="text-white/80 text-xs">Join our food community</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">Create Account</h1>
+            <p className="text-white/80 text-xs sm:text-sm">Join our food community</p>
           </div>
 
           {/* Register Form */}
@@ -153,7 +153,7 @@ function RegisterPage() {
             </div>
 
             {/* Optional fields in a more compact layout */}
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <div className="space-y-1">
                 <label className="block text-xs font-medium text-white/90">
                   Phone (Optional)

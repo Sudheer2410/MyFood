@@ -18,6 +18,7 @@ import AdminMenuPage from './pages/admin/AdminMenuPage';
 import OnboardingPage from './pages/OnboardingPage';
 import ProfilePage from './pages/ProfilePage';
 import VerifyEmailPage from './pages/VerifyEmailPage';
+import LocationDemoPage from './pages/LocationDemoPage';
 
 function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -252,6 +253,7 @@ function App() {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/admin/menu" element={<AdminMenuPage />} />
+            <Route path="/location-demo" element={<LocationDemoPage />} />
           </Routes>
         </main>
       </div>

@@ -56,7 +56,7 @@ function LoginPage() {
       </div>
 
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4 w-full">
-        <div className="backdrop-blur-xl bg-white/20 rounded-2xl shadow-2xl max-w-sm w-full p-4 border border-white/30">
+        <div className="backdrop-blur-xl bg-white/20 rounded-2xl shadow-2xl max-w-sm w-full p-4 sm:p-6 border border-white/30">
           {/* Back Button */}
           <Link 
             to="/" 
@@ -71,8 +71,8 @@ function LoginPage() {
             <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg border border-white/30">
               <ChefHat className="text-white w-6 h-6" />
             </div>
-            <h1 className="text-xl font-bold text-white mb-1">Welcome back</h1>
-            <p className="text-white/80 text-xs">Sign in to your account</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">Welcome back</h1>
+            <p className="text-white/80 text-xs sm:text-sm">Sign in to your account</p>
           </div>
 
           {/* Login Form */}
@@ -118,7 +118,7 @@ function LoginPage() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs">
               <label className="flex items-center">
                 <input type="checkbox" className="rounded border-white/30 text-white focus:ring-white/50 bg-white/10" />
                 <span className="ml-2 text-white/80">Remember me</span>
